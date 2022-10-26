@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('password');
             $table->integer('user_type');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

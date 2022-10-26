@@ -16,5 +16,6 @@ class DineUser extends Model
         'phone',
         'user_type',
         'password',
+        'image',
     ];
 }

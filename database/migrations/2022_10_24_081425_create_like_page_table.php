@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('house_details', function (Blueprint $table) {
+        Schema::create('like_page', function (Blueprint $table) {
             $table->id();
-            $table->string('cover')->nullable();
-            $table->string('title');
-            $table->string('description');
-            $table->string('location');
-            $table->string('price');
-            $table->string('house_type');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('house_id');
             $table->foreign('user_id')->references('id')->on('dineusers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('house_id')->references('id')->on('house_details')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('house_details');
+        Schema::dropIfExists('like_page');
     }
 };
