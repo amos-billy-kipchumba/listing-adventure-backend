@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 // Like page Routes
 Route::post('/add-house-like', [LikePageController::class, 'storeLike']);
 Route::get('/get-house-like/{id}', [LikePageController::class, 'getHouseLike']);
@@ -74,6 +75,9 @@ Route::post('/update-fifty-details/{user_id}', [FiftyController::class, 'updateF
 Route::post('/add-fifty-details', [FiftyController::class, 'storeFifty']);
 
 // House Details routes
+Route::get('/get-all-house-more-details/{id}', [HouseDetailsController::class, 'getAllHouseMoreDetails']);
+
+
 Route::get('/get-join-magic-details', [HouseDetailsController::class, 'getJoinMagicDetails']);
 Route::get('/get-magic-details/{magic_id}', [HouseDetailsController::class, 'getMagicDetails']);
 Route::get('/get-hello-details/{user_id}', [HouseDetailsController::class, 'getHelloDetails']);
