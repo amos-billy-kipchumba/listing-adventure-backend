@@ -41,6 +41,20 @@ return new class extends Migration
             $table->string('parking')->nullable();
             $table->string('long_term')->nullable();
             $table->string('private_entrance')->nullable();
+
+            $table->string('oven')->nullable();
+            $table->string('cinema')->nullable();
+            $table->string('children_play')->nullable();
+            $table->string('farm')->nullable();
+            $table->string('ranch')->nullable();
+            $table->string('office_equipment')->nullable();
+            $table->string('shower')->nullable();
+            $table->string('beach_front')->nullable();
+            $table->string('games_court')->nullable();
+            $table->string('chef')->nullable();
+            $table->string('shopping')->nullable();
+            $table->string('toilet')->nullable();
+
             $table->unsignedBigInteger('user');
             $table->unsignedBigInteger('house_id');
             $table->foreign('user')->references('id')->on('dineusers')->onUpdate('cascade')->onDelete('cascade');

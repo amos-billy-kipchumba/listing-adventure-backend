@@ -38,5 +38,18 @@ class SeventyFive extends Model
         'user',
         'essentials',
         'house_id',
+
+        'oven',
+        'cinema',
+        'children_play',
+        'farm',
+        'ranch',
+        'office_equipment',
+        'shower',
+        'beach_front',
+        'games_court',
+        'chef',
+        'shopping',
+        'toilet',
     ];
 }

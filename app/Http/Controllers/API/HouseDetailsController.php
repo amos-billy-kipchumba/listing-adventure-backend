@@ -168,6 +168,7 @@ class HouseDetailsController extends Controller
     {
         $HouseDetails = DB::table('fifty')
         ->join('house_details','fifty.house_id',"=",'house_details.id')
+        ->join('seventy_five','seventy_five.house_id','=','house_details.id')
         ->get();
 
         return response()->json([

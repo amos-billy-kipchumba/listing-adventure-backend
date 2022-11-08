@@ -79,6 +79,20 @@ class SeventyFiveController extends Controller
             $SeventyFive->long_term = $request->input('long_term');
             $SeventyFive->private_entrance = $request->input('private_entrance');
             $SeventyFive->essentials = $request->input('essentials');
+
+            $SeventyFive->oven = $request->input('oven');
+            $SeventyFive->cinema = $request->input('cinema');
+            $SeventyFive->children_play = $request->input('children_play');
+            $SeventyFive->farm = $request->input('farm');
+            $SeventyFive->ranch = $request->input('ranch');
+            $SeventyFive->office_equipment = $request->input('office_equipment');
+            $SeventyFive->shower = $request->input('shower');
+            $SeventyFive->beach_front = $request->input('beach_front');
+            $SeventyFive->games_court = $request->input('games_court');
+            $SeventyFive->chef = $request->input('chef');
+            $SeventyFive->shopping = $request->input('shopping');
+            $SeventyFive->toilet = $request->input('toilet');
+
             $SeventyFive->user = $request->input('userId');
             $SeventyFive->house_id = $request->input('house_id');
             $SeventyFive->save();
@@ -176,6 +190,19 @@ class SeventyFiveController extends Controller
             $SeventyFive->long_term = $request->input('long_term');
             $SeventyFive->private_entrance = $request->input('private_entrance');
             $SeventyFive->essentials = $request->input('essentials');
+
+            $SeventyFive->oven = $request->input('oven');
+            $SeventyFive->cinema = $request->input('cinema');
+            $SeventyFive->children_play = $request->input('children_play');
+            $SeventyFive->farm = $request->input('farm');
+            $SeventyFive->ranch = $request->input('ranch');
+            $SeventyFive->office_equipment = $request->input('office_equipment');
+            $SeventyFive->shower = $request->input('shower');
+            $SeventyFive->beach_front = $request->input('beach_front');
+            $SeventyFive->games_court = $request->input('games_court');
+            $SeventyFive->chef = $request->input('chef');
+            $SeventyFive->shopping = $request->input('shopping');
+
             $SeventyFive->user = $request->input('userId');
             $SeventyFive->house_id = $request->input('house_id');
             $SeventyFive->update();
