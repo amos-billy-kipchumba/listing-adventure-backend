@@ -55,6 +55,9 @@ return new class extends Migration
             $table->string('shopping')->nullable();
             $table->string('toilet')->nullable();
 
+            $table->string('baby_cot')->nullable();
+            $table->string('mini_bar')->nullable();
+
             $table->unsignedBigInteger('user');
             $table->unsignedBigInteger('house_id');
             $table->foreign('user')->references('id')->on('dineusers')->onUpdate('cascade')->onDelete('cascade');

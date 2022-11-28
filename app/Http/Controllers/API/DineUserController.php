@@ -5,8 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DineUser;
-// use App\Models\HouseDetails;
-use App\Models\Hundred;
+use App\Models\SendMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Support\Str;
@@ -24,6 +23,7 @@ class DineUserController extends Controller
             'email'=>'required|email|max:50',
             'phone'=>'required|max:15',
             'password'=>'required|max:191',
+            'host_id'=>'required|max:50',
         ]);
 
         if($validator->fails())
@@ -50,8 +50,16 @@ class DineUserController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->phone = $request->input('phone');
+        $user->host_id = $request->input('host_id');
         $user->user_type = 1;
         $user->save();
+
+        $f_name = $request->input('first_name');
+        $e_mail = $request->input('email');
+
+        $msg = "Welcome, you have successfully registered an account at dineN'Stay";
+
+        SendMail::sender($f_name,$e_mail,$msg);
 
         return response()->json([
             'status'=> 200,
@@ -95,6 +103,13 @@ class DineUserController extends Controller
         $user->phone = $request->input('phone');
         $user->user_type = 2;
         $user->save();
+
+        $f_name = $request->input('first_name');
+        $e_mail = $request->input('email');
+
+        $msg = "Welcome, you have successfully registered an account at dineN'Stay";
+
+        SendMail::sender($f_name,$e_mail,$msg);
 
         return response()->json([
             'status'=> 200,

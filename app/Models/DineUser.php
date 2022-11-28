@@ -17,5 +17,6 @@ class DineUser extends Model
         'user_type',
         'password',
         'image',
+        'host_id',
     ];
 }

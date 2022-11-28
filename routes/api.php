@@ -7,6 +7,7 @@ use App\Http\Controllers\SeventyFiveController;
 use App\Http\Controllers\API\HundredController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LikePageController;
+use App\Http\Controllers\NearbyServicesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Nearby services
+Route::post('/update-nearby-services/{id}', [NearbyServicesController::class, 'updateNearbyServices']);
+Route::get('/get-nearby-services/{id}', [NearbyServicesController::class, 'getNearbyServices']);
+Route::post('/add-nearby-services', [NearbyServicesController::class, 'storeNearbyServices']);
 
 // Like page Routes
 Route::post('/add-house-like', [LikePageController::class, 'storeLike']);

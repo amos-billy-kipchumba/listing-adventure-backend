@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookingInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\SendMail;
 class BookingController extends Controller
 {
     //
@@ -23,6 +24,20 @@ class BookingController extends Controller
         $bookingInfo->bank_message = "paid received ssdhkkjhjhrj";
         $bookingInfo->booking_phone = $request->input('booking_phone');
         $bookingInfo->save();
+
+        $f_name = $request->input('customer_first_name');
+        $e_mail = $request->input('customer_email');
+
+        $msg = "Congratulations, you have successfully booked a house at dineN'Stay. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
+
+        SendMail::sender($f_name,$e_mail,$msg);
+
+
+        $h_name = $request->input('customer_first_name');
+        $h_mail = $request->input('host_email');
+
+        $msgee = "Congratulations, $h_name has booked your house. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
+        SendMail::Notify($h_name,$h_mail,$msgee);
         return response()->json([
             'status'=> 200,
             'joinThousand'=> "Booked",

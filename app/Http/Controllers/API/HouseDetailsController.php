@@ -193,6 +193,7 @@ class HouseDetailsController extends Controller
         ->join('house_details','fifty.house_id',"=",'house_details.id')
         ->join('seventy_five','seventy_five.house_id','=','house_details.id')
         ->join('hundred','hundred.house_id','=','house_details.id')
+        ->join('nearby_services','nearby_services.house_id','=','house_details.id')
         ->where('house_details.id','=',$id)
         ->get();
 

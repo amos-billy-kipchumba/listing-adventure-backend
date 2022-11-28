@@ -51,5 +51,8 @@ class SeventyFive extends Model
         'chef',
         'shopping',
         'toilet',
+
+        'baby_cot',
+        'mini_bar',
     ];
 }
