@@ -11,8 +11,8 @@ class MPESAController extends Controller
 {
     public function generateAccessToken()
     {
-        $consumer_key=env('MPESA_KEY');
-        $consumer_secret=env('MPESA_SECRET');
+        $consumer_key="8aRqSGnRaCiBnsqTnsE8yAxdxIEMayCy";
+        $consumer_secret="7kR2aeMT6dbnT5VY";
         $credentials = base64_encode($consumer_key.":".$consumer_secret);
 
         $url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
