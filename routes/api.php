@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // MPESA ROUTES
+
+
+Route::get('v1/access-token',[MPESAController::class,'generateAccessToken']);
 Route::get('v1/register/url',[MPESAController::class,'mpesaRegisterUrls']);
 Route::post('v1/validation',[MPESAController::class,'mpesaValidation']);
 

@@ -30,7 +30,8 @@ class MPESAController extends Controller
         $curl_response = curl_exec($curl);
         dd($curl_response);
         $access_token=json_decode($curl_response);
-        return $access_token->access_token;
+        dd($access_token);
+        // return $access_token->access_token;
     }
 
     public function mpesaRegisterUrls()
