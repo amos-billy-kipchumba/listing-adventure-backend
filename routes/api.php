@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // MPESA ROUTES
+Route::post('v1/register/url',[MPESAController::class,'mpesaRegisterUrls']);
 Route::post('v1/validation',[MPESAController::class,'mpesaValidation']);
 
 Route::post('v1/transaction/confirmation',[MPESAController::class,'mpesaConfirmation']);
