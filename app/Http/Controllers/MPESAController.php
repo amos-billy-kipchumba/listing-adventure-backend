@@ -113,7 +113,7 @@ class MPESAController extends Controller
             'PartyA' => $phoneNumber, // replace this with your phone number
             'PartyB' => 174379,
             'PhoneNumber' => $phoneNumber, // replace this with your phone number
-            'CallBackURL' => 'https://dinenstay.amosbilly.co.ke/public/api/v1/stk/push_call_back',
+            'CallBackURL' => 'https://dinenstayapi.amosbilly.co.ke/public/api/v1/stk/push_call_back',
             'AccountReference' => "Room booking",
             'TransactionDesc' => "Testing stk push on sandbox"
         ];
@@ -171,18 +171,16 @@ class MPESAController extends Controller
     }
 
     public function checklast($AccID,$table,$curl_response){
-        if($table == 'accountbalance'){
+        $table = 'lnmo_api_response';
+        if($table == 'lnmo_api_response'){
+            $TableData = DB::table('lnmo_api_response')->where('CheckoutRequestID', $AccID)->where('status','1')->get();
+            if($TableData->isEmpty()){
+                sleep(10);
+                return $this->checklast($AccID,$table,$curl_response);
+            }else{
+                return $curl_response;
+            }
 
-
-        }elseif($table == 'lnmo_api_response'){
-                $table = 'lnmo_api_response';
-                $TableData = DB::table('lnmo_api_response')->where('CheckoutRequestID', $AccID)->where('status','1')->get();
-                if($TableData->isEmpty()){
-                    sleep(10);
-                    return $this->checklast($AccID,$table,$curl_response);
-                }else{
-                    return $curl_response;
-                }
         }else{
             return "Done";
         }
