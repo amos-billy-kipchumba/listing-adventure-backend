@@ -8,6 +8,7 @@ use App\Http\Controllers\API\HundredController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LikePageController;
 use App\Http\Controllers\NearbyServicesController;
+use App\Http\Controllers\MPESAController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// MPESA ROUTES
+Route::post('v1/validation',[MPESAController::class,'mpesaValidation']);
+
+Route::post('v1/transaction/confirmation',[MPESAController::class,'mpesaConfirmation']);
 
 // Nearby services
 Route::post('/update-nearby-services/{id}', [NearbyServicesController::class, 'updateNearbyServices']);

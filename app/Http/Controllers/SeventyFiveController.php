@@ -206,6 +206,9 @@ class SeventyFiveController extends Controller
             $SeventyFive->chef = $request->input('chef');
             $SeventyFive->shopping = $request->input('shopping');
 
+            $SeventyFive->baby_cot = $request->input('baby_cot');
+            $SeventyFive->mini_bar = $request->input('mini_bar');
+
             $SeventyFive->user = $request->input('userId');
             $SeventyFive->house_id = $request->input('house_id');
             $SeventyFive->update();
