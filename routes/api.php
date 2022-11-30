@@ -29,6 +29,11 @@ Route::get('v1/access-token',[MPESAController::class,'generateAccessToken']);
 Route::get('v1/register/url',[MPESAController::class,'mpesaRegisterUrls']);
 Route::post('v1/validation',[MPESAController::class,'mpesaValidation']);
 
+// STK
+Route::post('v1/stk/push',[MPESAController::class,'customerMpesaSTKPush']);
+Route::post('v1/stk/push_call_back',[MPESAController::class,'customerMpesaSTKPushCallBack']);
+
+
 Route::post('v1/transaction/confirmation',[MPESAController::class,'mpesaConfirmation']);
 
 // Nearby services
