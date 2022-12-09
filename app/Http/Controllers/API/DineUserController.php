@@ -54,12 +54,12 @@ class DineUserController extends Controller
         $user->user_type = 1;
         $user->save();
 
-        $f_name = $request->input('first_name');
-        $e_mail = $request->input('email');
+        // $f_name = $request->input('first_name');
+        // $e_mail = $request->input('email');
 
-        $msg = "Welcome, you have successfully registered an account at dineN'Stay";
+        // $msg = "Welcome, you have successfully registered an account at dineN'Stay";
 
-        SendMail::sender($f_name,$e_mail,$msg);
+        // SendMail::sender($f_name,$e_mail,$msg);
 
         return response()->json([
             'status'=> 200,
@@ -104,12 +104,12 @@ class DineUserController extends Controller
         $user->user_type = 2;
         $user->save();
 
-        $f_name = $request->input('first_name');
-        $e_mail = $request->input('email');
+        // $f_name = $request->input('first_name');
+        // $e_mail = $request->input('email');
 
-        $msg = "Welcome, you have successfully registered an account at dineN'Stay";
+        // $msg = "Welcome, you have successfully registered an account at dineN'Stay";
 
-        SendMail::sender($f_name,$e_mail,$msg);
+        // SendMail::sender($f_name,$e_mail,$msg);
 
         return response()->json([
             'status'=> 200,
