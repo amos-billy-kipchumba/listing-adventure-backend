@@ -14,11 +14,11 @@ class MPESAController extends Controller
 {
     public function generateAccessToken()
     {
-        $consumer_key="8aRqSGnRaCiBnsqTnsE8yAxdxIEMayCy";
-        $consumer_secret="7kR2aeMT6dbnT5VY";
+        $consumer_key="NPFBvVpd4siDQQG2Nx97olmZEyaOlwIw";
+        $consumer_secret="mRNHpqfm1qGcqpot";
 
         $credentials = base64_encode($consumer_key.":".$consumer_secret);
-        $url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+        $url = "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Basic ".$credentials));
@@ -35,7 +35,7 @@ class MPESAController extends Controller
     public function mpesaRegisterUrls()
     {
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://sandbox.safaricom.co.ke/mpesa/c2b/v2/registerurl');
+        curl_setopt($curl, CURLOPT_URL, 'https://api.safaricom.co.ke/mpesa/c2b/v2/registerurl');
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization: Bearer '. $this->generateAccessToken()));
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -88,8 +88,8 @@ class MPESAController extends Controller
     public function lipaNaMpesaPassword()
     {
         $lipa_time = Carbon::rawParse('now')->format('YmdHms');
-        $passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-        $BusinessShortCode = 174379;
+        $passkey = "8c49a62985112ee437465eb38648200234c051a169dcc31c4badc7fc9bdaa720";
+        $BusinessShortCode = 4101779;
         $timestamp =$lipa_time;
         $lipa_na_mpesa_password = base64_encode($BusinessShortCode.$passkey.$timestamp);
         return $lipa_na_mpesa_password;
@@ -99,19 +99,19 @@ class MPESAController extends Controller
     {
         $phoneNumber = $request->phone_number;
         $AmountSTK = $request->Amount;
-        $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+        $url = 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.$this->generateAccessToken()));
         $curl_post_data = [
             //Fill in the request parameters with valid values
-            'BusinessShortCode' => 174379,
+            'BusinessShortCode' => 4101779,
             'Password' => $this->lipaNaMpesaPassword(),
             'Timestamp' => Carbon::rawParse('now')->format('YmdHms'),
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => $AmountSTK,
             'PartyA' => $phoneNumber, // replace this with your phone number
-            'PartyB' => 174379,
+            'PartyB' => 4101779,
             'PhoneNumber' => $phoneNumber, // replace this with your phone number
             'CallBackURL' => 'https://dinenstayapi.amosbilly.co.ke/public/api/v1/stk/push_call_back',
             'AccountReference' => "Room booking",
@@ -123,7 +123,7 @@ class MPESAController extends Controller
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
 
-
+        dd($curl_response);
         // Insert MerchantRequestID
         $curl_content=json_decode($curl_response);
         $mpesa_transaction = new STKMpesaTransaction();
@@ -178,11 +178,17 @@ class MPESAController extends Controller
                 sleep(10);
                 return $this->checklast($AccID,$table,$curl_response);
             }else{
-                return $curl_response;
+                return response()->json([
+                    'status'=> 200,
+                    'bookingInfoForHost'=> "You payment has been received",
+                ]);
             }
 
         }else{
-            return "Done";
+            return response()->json([
+                'status'=> 200,
+                'bookingInfoForHost'=> "You payment has been received",
+            ]);
         }
     }
 }

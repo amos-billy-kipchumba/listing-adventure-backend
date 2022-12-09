@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('lnmo_api_response', function (Blueprint $table) {
-            $table->id();
+            $table->comment('');
+            $table->bigIncrements('id');
             $table->integer('user_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('Amount', 20)->nullable();
-            $table->string('MpesaReceiptNumber', 255);
             $table->string('CheckoutRequestID', 255);
             $table->string('MerchantRequestID', 255);
+            $table->string('MpesaReceiptNumber', 255)->nullable();
             $table->string('TransactionDate', 255)->nullable();
             $table->string('PhoneNumber', 15)->nullable();
             $table->dateTime('updateTime')->useCurrent();

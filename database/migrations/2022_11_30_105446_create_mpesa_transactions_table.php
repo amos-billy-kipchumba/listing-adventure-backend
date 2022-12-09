@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mpesa_transactions', function (Blueprint $table) {
-            $table->id();
+            $table->comment('');
+            $table->bigIncrements('id');
             $table->tinyInteger('status')->default(0);
             $table->string('TransactionType', 10);
             $table->string('TransID', 10)->unique('TransID');
@@ -30,11 +31,8 @@ return new class extends Migration
             $table->string('MiddleName', 10)->nullable();
             $table->string('LastName', 10)->nullable();
             $table->dateTime('lastUpdate')->useCurrent();
-
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('house_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('dineusers')->onUpdate('cascade');
-            $table->foreign('house_id')->references('id')->on('house_details')->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id')->nullable()->index('mpesa_transactions_user_id_foreign');
+            $table->unsignedBigInteger('house_id')->nullable()->index('mpesa_transactions_house_id_foreign');
             $table->timestamps();
         });
     }
