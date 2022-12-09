@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('lnmo_api_response', function (Blueprint $table) {
             $table->comment('');
             $table->bigIncrements('id');
-            $table->integer('user_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('Amount', 20)->nullable();
             $table->string('CheckoutRequestID', 255);
@@ -25,6 +24,17 @@ return new class extends Migration
             $table->string('TransactionDate', 255)->nullable();
             $table->string('PhoneNumber', 15)->nullable();
             $table->dateTime('updateTime')->useCurrent();
+
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
+            $table->string('number_of_guests')->nullable();
+            $table->string('number_of_days')->nullable();
+            $table->string('number_of_hours')->nullable();
+
+            $table->unsignedBigInteger('user');
+            $table->unsignedBigInteger('house_id');
+            $table->foreign('user')->references('id')->on('dineusers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('house_id')->references('id')->on('house_details')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
