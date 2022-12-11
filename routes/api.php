@@ -6,9 +6,11 @@ use App\Http\Controllers\API\FiftyController;
 use App\Http\Controllers\SeventyFiveController;
 use App\Http\Controllers\API\HundredController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\customer_review_controller;
 use App\Http\Controllers\LikePageController;
 use App\Http\Controllers\NearbyServicesController;
 use App\Http\Controllers\MPESAController;
+use App\Http\Controllers\ReviewPage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// CUSTOMER REVIEW PAGE
+Route::post('/update-customer-review/{id}', [customer_review_controller::class, 'updateCustomerReview']);
+Route::get('/get-all-specific-customer-review/{id}', [customer_review_controller::class, 'getAllSpecificCustomerReviews']);
+Route::post('/add-customer-review', [customer_review_controller::class, 'addCustomerReview']);
+
+// REVIEW PAGE
+Route::post('/update-review/{id}', [ReviewPage::class, 'updateReview']);
+Route::get('/get-all-specific-review/{id}', [ReviewPage::class, 'getAllSpecificReviews']);
+Route::post('/add-review', [ReviewPage::class, 'addReview']);
+
 // MPESA ROUTES
 
 
