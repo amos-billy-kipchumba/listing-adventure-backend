@@ -25,11 +25,7 @@ return new class extends Migration
             $table->string('PhoneNumber', 15)->nullable();
             $table->dateTime('updateTime')->useCurrent();
 
-            $table->string('start_date')->nullable();
-            $table->string('end_date')->nullable();
-            $table->string('number_of_guests')->nullable();
-            $table->string('number_of_days')->nullable();
-            $table->string('number_of_hours')->nullable();
+
 
             $table->unsignedBigInteger('user');
             $table->unsignedBigInteger('house_id');

@@ -124,4 +124,17 @@ class BookingController extends Controller
             'message'=>'booking cancelled Successfully',
         ]);
     }
+
+
+    public function deleteCustomerBookingTwo($id)
+    {
+        $BookingInfo = BookingInfo::find($id);
+
+        $BookingInfo->delete();
+
+        return response()->json([
+            'status'=> 200,
+            'message'=>'booking cancelled Successfully',
+        ]);
+    }
 }

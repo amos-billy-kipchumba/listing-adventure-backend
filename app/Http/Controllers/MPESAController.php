@@ -9,7 +9,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\Models\STKMpesaTransaction;
-use App\Models\SendMail;
 
 class MPESAController extends Controller
 {
@@ -131,29 +130,9 @@ class MPESAController extends Controller
         $mpesa_transaction->CheckoutRequestID =  $curl_content->CheckoutRequestID;
         $mpesa_transaction->MerchantRequestID =  $curl_content->MerchantRequestID;
         $mpesa_transaction->user =  $request->input('user_id');
-
-        $mpesa_transaction->start_date =  $request->input('start_date');
-        $mpesa_transaction->end_date =  $request->input('end_date');
-        $mpesa_transaction->number_of_guests =  $request->input('number_of_guests');
-        $mpesa_transaction->number_of_days =  $request->input('number_of_days');
-        $mpesa_transaction->number_of_hours =  $request->input('number_of_hours');
         $mpesa_transaction->house_id =  $request->input('house_id');
 
         $mpesa_transaction->save();
-
-        $f_name = $request->input('customer_first_name');
-        $e_mail = $request->input('customer_email');
-
-        $msg = "Congratulations, you have successfully booked a house at dineN'Stay. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
-
-        SendMail::sender($f_name,$e_mail,$msg);
-
-
-        $h_name = $request->input('customer_first_name');
-        $h_mail = $request->input('host_email');
-
-        $msgee = "Congratulations, $h_name has booked your house. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
-        SendMail::Notify($h_name,$h_mail,$msgee);
 
         Log::info($curl_response);
         $CheckoutRequestID = $curl_content->CheckoutRequestID;

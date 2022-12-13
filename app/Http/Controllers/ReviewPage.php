@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\review_page;
-
+use Illuminate\Support\Facades\DB;
 class ReviewPage extends Controller
 {
     //
@@ -25,7 +25,11 @@ class ReviewPage extends Controller
 
     public function getAllSpecificReviews($id)
     {
-        $review_page = review_page::where('house_id',"=",$id)->get();
+        $review_page = DB::table('review_page')
+        ->join('house_details','review_page.house_id',"=",'house_details.id')
+        ->join('dineusers','dineusers.id','=','review_page.user')
+        ->where('house_details.id','=',$id)
+        ->get();
 
         return response()->json([
             'status'=> 200,
@@ -56,5 +60,18 @@ class ReviewPage extends Controller
                 'message'=> 'No record with such id found!',
             ]);
         }
+    }
+
+    public function getAllSpecificReviewsForAdmin()
+    {
+        $review_page = DB::table('review_page')
+        ->join('house_details','review_page.house_id',"=",'house_details.id')
+        ->join('dineusers','dineusers.id','=','review_page.user')
+        ->get();
+
+        return response()->json([
+            'status'=> 200,
+            'host_review_page'=> $review_page,
+        ]);
     }
 }

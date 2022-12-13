@@ -33,6 +33,7 @@ Route::post('/add-customer-review', [customer_review_controller::class, 'addCust
 // REVIEW PAGE
 Route::post('/update-review/{id}', [ReviewPage::class, 'updateReview']);
 Route::get('/get-all-specific-review/{id}', [ReviewPage::class, 'getAllSpecificReviews']);
+Route::get('/get-all-specific-review-for-admin', [ReviewPage::class, 'getAllSpecificReviewsForAdmin']);
 Route::post('/add-review', [ReviewPage::class, 'addReview']);
 
 // MPESA ROUTES
@@ -59,6 +60,7 @@ Route::post('/add-house-like', [LikePageController::class, 'storeLike']);
 Route::get('/get-house-like/{id}', [LikePageController::class, 'getHouseLike']);
 
 //Booking Routes
+Route::delete('/delete-customer-booking-two/{id}', [BookingController::class, 'deleteCustomerBookingTwo']);
 Route::delete('/delete-customer-booking/{id}', [BookingController::class, 'deleteCustomerBooking']);
 Route::get('/get-total-booked-for-host/{id}', [BookingController::class, 'getTotalBookedForHost']);
 Route::get('/get-total-booked/{id}', [BookingController::class, 'getTotalBooked']);
