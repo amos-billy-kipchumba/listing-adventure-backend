@@ -123,11 +123,12 @@ class MPESAController extends Controller
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
 
-        dd($curl_response);
+        // dd($curl_response);
         // Insert MerchantRequestID
         $curl_content=json_decode($curl_response);
         $mpesa_transaction = new STKMpesaTransaction();
         $mpesa_transaction->CheckoutRequestID =  $curl_content->CheckoutRequestID;
+        $mpesa_transaction->MerchantRequestID =  $curl_content->MerchantRequestID;
         $mpesa_transaction->MerchantRequestID =  $curl_content->MerchantRequestID;
         $mpesa_transaction->user =  $request->input('user_id');
         $mpesa_transaction->house_id =  $request->input('house_id');
@@ -182,7 +183,7 @@ class MPESAController extends Controller
             }else{
                 return response()->json([
                     'status'=> 200,
-                    'bookingInfoForHost'=> "You payment has been received",
+                    'bookingInfoForHost'=> $TableData,
                 ]);
             }
 
