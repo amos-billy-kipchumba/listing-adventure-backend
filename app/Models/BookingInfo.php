@@ -23,5 +23,6 @@ class BookingInfo extends Model
         'mpesa_message',
         'bank_message',
         'booking_phone',
+        'pay_id',
     ];
 }

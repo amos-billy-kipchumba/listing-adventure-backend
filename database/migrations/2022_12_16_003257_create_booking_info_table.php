@@ -27,8 +27,10 @@ return new class extends Migration
             $table->string('booking_phone')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('house_id');
+            $table->unsignedBigInteger('pay_id');
             $table->foreign('user_id')->references('id')->on('dineusers')->onUpdate('cascade');
             $table->foreign('house_id')->references('id')->on('house_details')->onUpdate('cascade');
+            $table->foreign('pay_id')->references('id')->on('lnmo_api_response')->onUpdate('cascade');
             $table->timestamps();
         });
     }

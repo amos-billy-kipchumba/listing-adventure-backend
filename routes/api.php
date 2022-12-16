@@ -62,6 +62,7 @@ Route::get('/get-house-like/{id}', [LikePageController::class, 'getHouseLike']);
 //Booking Routes
 Route::delete('/delete-customer-booking-two/{id}', [BookingController::class, 'deleteCustomerBookingTwo']);
 Route::delete('/delete-customer-booking/{id}', [BookingController::class, 'deleteCustomerBooking']);
+Route::get('/get-total-booked-for-admin', [BookingController::class, 'getTotalBookedForAdmin']);
 Route::get('/get-total-booked-for-host/{id}', [BookingController::class, 'getTotalBookedForHost']);
 Route::get('/get-total-booked/{id}', [BookingController::class, 'getTotalBooked']);
 Route::get('/get-booked-info/{id}', [BookingController::class, 'getBookedInfo']);

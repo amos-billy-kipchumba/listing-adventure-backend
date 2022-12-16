@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookingInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use App\Models\SendMail;
+use App\Models\SendMail;
 class BookingController extends Controller
 {
     //
@@ -19,25 +19,26 @@ class BookingController extends Controller
         $bookingInfo->number_of_days = $request->input('number_of_days');
         $bookingInfo->number_of_hours = $request->input('number_of_hours');
         $bookingInfo->total_price = $request->input('total_price');
-        $bookingInfo->paid = "yes";
+        $bookingInfo->paid = "no";
         $bookingInfo->mpesa_message = "paid jjskdfgjkk";
         $bookingInfo->bank_message = "paid received ssdhkkjhjhrj";
         $bookingInfo->booking_phone = $request->input('booking_phone');
+        $bookingInfo->pay_id = $request->input('pay_id');
         $bookingInfo->save();
 
-        // $f_name = $request->input('customer_first_name');
-        // $e_mail = $request->input('customer_email');
+        $f_name = $request->input('customer_first_name');
+        $e_mail = $request->input('customer_email');
 
-        // $msg = "Congratulations, you have successfully booked a house at dineN'Stay. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
+        $msg = "Congratulations, you have successfully booked a house at dineN'Stay. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
 
-        // SendMail::sender($f_name,$e_mail,$msg);
+        SendMail::sender($f_name,$e_mail,$msg);
 
 
-        // $h_name = $request->input('customer_first_name');
-        // $h_mail = $request->input('host_email');
+        $h_name = $request->input('customer_first_name');
+        $h_mail = $request->input('host_email');
 
-        // $msgee = "Congratulations, $h_name has booked your house. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
-        // SendMail::Notify($h_name,$h_mail,$msgee);
+        $msgee = "Congratulations, $h_name has booked your house. You may <a href='https://www.dinenstay.amosbilly.co.ke/login-user'>login</a>to your account";
+        SendMail::Notify($h_name,$h_mail,$msgee);
         return response()->json([
             'status'=> 200,
             'joinThousand'=> "Booked",
@@ -110,6 +111,20 @@ class BookingController extends Controller
         return response()->json([
             'status'=> 200,
             'bookingInfoForHost'=> $BookingInfo,
+        ]);
+    }
+
+    public function getTotalBookedForAdmin()
+    {
+        $BookingInfo = DB::table('booking_info')
+        ->join('house_details','booking_info.house_id',"=",'house_details.id')
+        ->join('dineusers','dineusers.id','=','house_details.user_id')
+        ->join('lnmo_api_response','lnmo_api_response.house_id','=','booking_info.house_id')
+        ->get();
+
+        return response()->json([
+            'status'=> 200,
+            'bookingInfoForAdmin'=> $BookingInfo,
         ]);
     }
 
