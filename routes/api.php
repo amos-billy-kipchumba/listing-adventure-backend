@@ -67,6 +67,9 @@ Route::get('/get-total-booked-for-host/{id}', [BookingController::class, 'getTot
 Route::get('/get-total-booked/{id}', [BookingController::class, 'getTotalBooked']);
 Route::get('/get-booked-info/{id}', [BookingController::class, 'getBookedInfo']);
 Route::get('/get-booked-dates/{id}', [BookingController::class, 'getBookedDates']);
+
+Route::get('/get-to-booking-info/{id}', [BookingController::class, 'getToBookingInfo']);
+Route::post('/update-booking-info/{id}', [BookingController::class, 'updateBookingInfo']);
 Route::post('/add-booking-info', [BookingController::class, 'storeBookingInfo']);
 
 //Thousand Routes
